@@ -1,62 +1,50 @@
-# Your startup name here
+# Just4Fun
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-
-> [!NOTE]
->  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
-
-> [!NOTE]
->  If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
+This application will be an online version of the classic game Connect Four. It will allow users to login and play their friends. This README will be an overview of various technologies used in the game as well as a few possible uses.
 
 ## 🚀 Specification Deliverable
 
-> [!NOTE]
->  Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Remember when you were a kid and played Connect Four with your siblings or friends? So fun right? Now remember how frustrated you were when the game broke, letting all the pieces fall before you were finished. Or how annoying it was when your little sister threw the game across the room because you beat her (again)? The Just4Fun application removes all these and other obstacles, allowing you and your friends to play a new version of Connect Four without the drama! After logging in, you can play game after game with your friends, even saving games you don't have time to finish, allowing you to come back later. Just4Fun is all the nostalgia and none of the nuisance!
 
 ### Design
 
-![Design image](placeholder.png)
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
-```
+![Design image](design.png)
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Users will be able to choose their chip color
+- Players choose where to play their next piece by moving a sliding arrow across the top
+- Two players can play each other in a game. Their moves will be broadcast to each other
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Basic structure of my website. I'll use HTML to create the base of my login page and the page where users play the game.
+- **CSS** - I'll use CSS to add colors to the page so players know whose piece is whose. CSS will help me style the pages I created using HTML so they're more user-friendly.
+- **React** - I will use React to let the user interact with the board. This technology will allow players to click where they want their pieces to go.
+- **Service** - Provides endpoints for:
+  - register, login, logout
+  - accessing unfinished games
+  - creating a new game
+  - playing a piece in the game
+  - checking if someone has won the game
+  - calling http://numbersapi.com/ to display random facts about the number 4 and its multiples
+- **DB/Login** - Store authentication information of users as well as their unfinished games.
+- **WebSocket** - communicates back and forth to the two users playing the game what the other user did in their last turn.
 
 ## 🚀 AWS deliverable
 
