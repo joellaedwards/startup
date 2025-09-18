@@ -50,21 +50,21 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [X] **Server deployed and accessible with custom domain name** - [My server link](https://just4fungame.click).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [X] **HTML pages** - I added three HTML pages. A home page, a page to play the game, and a page to look at previous games.
+- [X] **Proper HTML element usage** - I added headers, footers, navigation sections, and a few lists on these pages.
+- [X] **Links** - I have links on each page that links to each of the other pages. I also added a link on the bottom of each page to my github repo.
+- [X] **Text** - I added text about the game and headers on each page.
+- [X] **3rd party API placeholder** - I added a placeholder for the random number fact on my gameplay page.
+- [X] **Images** - I added an image of connect four to the website.
+- [X] **Login placeholder** - I added a login placeholder on the home page.
+- [X] **DB data placeholder** - I added a placeholder for the list of games that will be stored in the database.
+- [X] **WebSocket placeholder** - I put a placeholder in for updating the board when the other person makes a move.
 
 ## 🚀 CSS deliverable
 
