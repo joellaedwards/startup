@@ -2,19 +2,50 @@ body {
     display: flex;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     flex-direction: column;
+    color: #463cdf;
     min-width: 375px;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.navbar {
+    background-color: #463cdf !important;
+}
+.navbar .nav-link {
+    color: #fff;
 }
 
 header {
     flex: 0 80px;
+    background-color: #8db7fa;
 }
 
 main {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background-color: #8db7fa;
+    padding: 10rem;
+}
+
+form {
+    background-color: #8db7fa;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem;
+}
+
+button {
+    padding: 0.75rem;
+    margin: 0.5rem;
 }
 
 footer {
     flex: 0 30px;
+    background-color: #8db7fa;
 }
