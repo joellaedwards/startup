@@ -70,12 +70,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [X] **Header, footer, and main content body** - I added a different font and made the header a different color than the rest of the page. I added a background color for the main and footer sections because I liked how they look when the blend into each other.
+- [X] **Navigation elements** - I added a section of the CSS just for the navigation elements. The bootstrap that I used was making it difficult to work with the CSS, but when I imported the CSS after the bootstrap, it stopped overriding my CSS changes to the nav-bar.
+- [X] **Responsive to window resizing** - This deliverable was especially tricky on the grid I created for the connect 4 game itself. I had to remove some of the constraints I had added regarding minimum height/width and add an aspect ratio so the page could be minimied without losing the integrity of the board.
+- [X] **Application elements** - The spacing and contrast on the board will make it easy for players to see and know where they can play next.
+- [X] **Application text content** - Used the same font family throughout my application.
+- [X] **Application images** - Added a picture of the classic connect4 game on the header of my home page. Used CSS to adjust the spacing to make it the same height as the other header items.
 
 ## 🚀 React part 1: Routing deliverable
 
