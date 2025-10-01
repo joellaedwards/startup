@@ -3,8 +3,8 @@ body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     flex-direction: column;
     color: #463cdf;
-    min-width: 375px;
-    min-height: 100vh;
+    /* min-width: 375px;
+    min-height: 100vh; */
     margin: 0;
 }
 
@@ -24,30 +24,32 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: left;
+    align-items: left;
     background-color: #8db7fa;
-    padding: 10rem;
+    padding: 2rem;
 }
 
-.board {
+
+.game-board {
     display: flex;
     flex-direction: column;
-    background-color: pink;
-    max-width: 90vw;
-    margin: auto;
-    aspect-ratio: 7 / 6;
-    padding: 1vw;
+    background-color: #1a1cad;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
 .row {
     display: flex;
     flex: 1;
-    justify-content: space-between;
+    gap: 0.5vw;
 }
 
 .cell {
     flex: 1;
+    max-width: 40px;
+    max-height: 40px;
     aspect-ratio: 1 / 1;
     background: white;
     border-radius: 50%;
