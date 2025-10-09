@@ -1,25 +1,42 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Play } from './play/play';
+import { GameList } from './gameList/gameList';
 
 export default function App() {
   return (
   
+    <BrowserRouter>
   
-  <div className="body bg-dark text-light">App will display here
+  <div className="body bg-dark text-light">
       <header>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
             <ul className="navbar-nav">
-                <li className="nav-item me-3"><a className="nav-link" href="index.html">Home</a></li>
-                <li className="nav-item me-3"><a className="nav-link" href="play.html">Play</a></li>
-                <li className="nav-item me-3"><a className="nav-link" href="gameList.html">Game List</a></li>
+                <li className="nav-item me-3">
+                    <NavLink className="nav-link" to="">Home</NavLink>
+                </li>
+                <li className="nav-item me-3">
+                    <NavLink className="nav-link" to="play">Play</NavLink>
+                </li>
+                <li className="nav-item me-3">
+                    <NavLink className="nav-link" to="gameList">Game List</NavLink>
+                </li>
             </ul>
         </div>
     </nav>
 </header>
   
-  <main>App components go here</main>
+<Routes>
+  <Route path='/' element={<Login />} exact />
+  <Route path='/play' element={<Play />} />
+  <Route path='/gameList' element={<GameList />} />
+  <Route path='*' element={<NotFound />} />
+</Routes>
+
       <footer>
       <hr />
       <span className="text-reset">Created by Jo Edwards</span>
@@ -27,6 +44,12 @@ export default function App() {
       <a href="https://github.com/joellaedwards/startup">Startup Github</a>
     </footer>
   </div>
+  </BrowserRouter>
 );
 
+}
+
+
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
