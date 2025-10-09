@@ -1,5 +1,5 @@
 import React from 'react';
-import './play.css'
+import './play.css';
 
 export function Play() {
   return (
