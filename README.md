@@ -81,9 +81,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [X] **Bundled using Vite** - I feel like everything is so much better organized! It's not just a ton of html and css files anymore.
+- [X] **Components** - I have 3 components: login/home page, play, and a list of previous games.
+- [X] **Router** - I use the router to go between each of the three components.
 
 ## 🚀 React part 2: Reactivity deliverable
 
