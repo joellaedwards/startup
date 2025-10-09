@@ -39,7 +39,7 @@ export default function App() {
 
       <footer>
       <hr />
-      <span className="text-reset">Created by Jo Edwards</span>
+      <span className="text-reset">Created by Jo'ella Edwards</span>
       <br />
       <a href="https://github.com/joellaedwards/startup">Startup Github</a>
     </footer>
