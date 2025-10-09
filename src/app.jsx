@@ -12,23 +12,23 @@ export default function App() {
     <BrowserRouter>
   
   <div className="body bg-dark text-light">
-      <header>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container">
-            <ul className="navbar-nav">
-                <li className="nav-item me-3">
-                    <NavLink className="nav-link" to="">Home</NavLink>
-                </li>
-                <li className="nav-item me-3">
-                    <NavLink className="nav-link" to="play">Play</NavLink>
-                </li>
-                <li className="nav-item me-3">
-                    <NavLink className="nav-link" to="gameList">Game List</NavLink>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+        <header>
+            <nav class="navbar">
+                <img src="connectimage.png" alt="connect4" class="nav-logo"/>
+                <ul class="navbar-nav">
+                    <li className="nav-item me-3">
+                        <NavLink className="nav-link" to="">Home</NavLink>
+                    </li>
+                    <li className="nav-item me-3">
+                        <NavLink className="nav-link" to="play">Play</NavLink>
+                    </li>
+                    <li className="nav-item me-3">
+                        <NavLink className="nav-link" to="gameList">Game List</NavLink>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
   
 <Routes>
   <Route path='/' element={<Login />} exact />
