@@ -1,7 +1,18 @@
 import React from 'react';
 import './play.css';
 
-export function Play() {
+import { ConnectGame } from './connectGame';
+
+export function Play(props) {
+
+    const [fourFact, setFourFact] = React.useState('');
+    
+    React.useEffect(() => {
+        setFourFact("placeholder fact")
+    }, []);
+    
+
+
   return (
 <main>
     <section className="color-choices">
@@ -16,9 +27,9 @@ export function Play() {
         </ul>
     </section>
     <section className="game-updates">
-        You are playing with Bob.
+        You are playing with {props.userName}.
         <br  />
-        Bob just placed a token in the second column.
+        {props.userName} just placed a token in the second column.
         <br  />
         It's your turn.
     </section>
@@ -26,37 +37,12 @@ export function Play() {
     <br />
     <br />
 
-    <section className="game-board">
-        <div className="row">
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        </div>
-        <div className="row">
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        </div>
-        <div className="row">
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        </div>
-        <div className="row">
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        </div>
-        <div className="row">
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        </div>
-        <div className="row">
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-            <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        </div>
-    </section>
+
 
     <br />
     <br />
 
-    <h3>Random fact about the number 4 from the numbers API</h3>
+    <h3>{fourFact}</h3>
     <button type="submit">Save Game</button>
 
 </main>
