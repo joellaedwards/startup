@@ -14,8 +14,8 @@ export function Play(props) {
 
 
   return (
-<main>
-    <section className="color-choices">
+    <main>
+    {/* <section className="color-choices">
         <h2>Pick Your Color:</h2>
         <ul className="colors">
             <li className="color" style={{color: '#17197c'}}>Blue</li>
@@ -25,17 +25,21 @@ export function Play(props) {
             <li className="color" style={{color: '#571870'}}>Purple</li>
             <li className="color" style={{color: 'red'}}>Red</li>
         </ul>
-    </section>
+    </section> */}
     <section className="game-updates">
-        You are playing with {props.userName}.
+        You are playing with Bill.
         <br  />
-        {props.userName} just placed a token in the second column.
+        Bill just placed a token in the {props.pieceCol}
         <br  />
         It's your turn.
     </section>
 
     <br />
-    <br />
+    <section className="game-board">
+        
+        onClick={() => }
+        <ConnectGame pieceCol={props.}
+    </section>
 
 
 

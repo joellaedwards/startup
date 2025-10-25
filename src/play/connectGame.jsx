@@ -3,7 +3,7 @@ import React from 'react';
 
 export function ConnectGame(props) {
     const userName = props.userName;
-    const color = props.color;
+    let color = "red";
     const ROWS = 6;
     const COLS = 7;
 
@@ -11,17 +11,178 @@ export function ConnectGame(props) {
         Array.from({ length: ROWS }, () => Array(COLS).fill(null))
     );    
 
-    function onDropped(pieceCol) {
+
+    async function onPressed(clickPosition) {
+        if (placePiece(POSITION HERE) != -1) {
+
+        }
+    }
+
+    function placePiece(pieceCol) {
         const newBoard = board.map(row => [...row]);
         for (let row = 0; row < ROWS; row++) {
             if (!board[row][pieceCol]) {
                 newBoard[row][pieceCol] = color
                 setBoard(newBoard)
-                return true;
+                return row;
             }
         }
         // that column is full :(
+        return -1
+    }
+
+    function isFourInARow(pieceRow, pieceCol) {
+
+        // vertically
+        let numInOrder = 1;
+        for (i = 1; i < 4; ++i) {
+            testRow = pieceRow - i;
+            if (testRow < 0) {
+                break
+            }
+            if (board[testRow][pieceCol] == color) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+        testRow = pieceRow
+        for (i = 1; i < 4; ++i) {
+            testRow = pieceRow + i;
+            if (testRow > 5) {
+                break
+            }
+            if (board[testRow][pieceCol] == color) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+            
+
+        // horizontally
+        numInOrder = 1;
+        for (i = 1; i < 4; ++i) {
+            testCol = pieceCol - i;
+            if (testCol < 0) {
+                break
+            }
+            if (board[pieceRow][testCol] == color) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+        testCol = pieceCol
+        for (i = 1; i < 4; ++i) {
+            testCol = pieceCol + i;
+            if (testCol > 6) {
+                break
+            }
+            if (board[pieceRow][testCol] == color) {
+                numInOrder = numInOrder + 1
+            }
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+        // up right
+        numInOrder = 1;
+        for (i = 1; i < 4; ++i) {
+            testRow = pieceRow + i;
+            testCol = pieceCol + 1;
+            if (testRow > 5 || testCol > 6) {
+                break
+            }
+            if (board[testRow][testCol] == color) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+        // down left
+        for (i = 1; i < 4; ++i) {
+            testRow = pieceRow - i;
+            testCol = pieceCol - i;
+            if (testRow < 0 || testCol < 0) {
+                break
+            }
+            if (board[testRow][testCol] == color) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+        // up left
+        numInOrder = 1;
+        for (i = 1; i < 4; ++i) {
+            testRow = pieceRow + i;
+            testCol = pieceCol - 1;
+            if (testRow > 5 || testCol < 0) {
+                break
+            }
+            if (board[testRow][testCol] == color) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+        // down right
+        for (i = 1; i < 4; ++i) {
+            testRow = pieceRow - i;
+            testCol = pieceCol + i;
+            if (testRow < 0 || testCol > 6) {
+                break
+            }
+            if (board[testRow][testCol] == color) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
         return false
+    }
+
+    function changeTurn() {
+        if (color == "red") {
+            color = "yellow"
+        }
     }
     
 
@@ -79,5 +240,4 @@ export function ConnectGame(props) {
 
 
     )
-
 }

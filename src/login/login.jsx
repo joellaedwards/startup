@@ -1,19 +1,28 @@
 import React from 'react';
 
-export function Login() {
+import { AuthState } from './authstate';
+
+
+export function Login({ userName, authState, onAuthChange }) {
   return (
     <main>
-      <h1>Welcome to Just4Fun!</h1>
-      <form method="get" action="play.html">
         <div>
-          <input type="text" placeholder="username"/>
+          {authState !== AuthState.Unknown && <h1>Welcome to Just4Fun!</h1>} 
+          {authState === AuthState.Authenticated && (
+            <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />
+          )}
+          {authState === AuthState.Unauthenticated && (
+            <Unauthenticated
+              userName={userName}
+              onLogin={(loginUserName) => {
+                onAuthChange(loginUserName, AuthState.Authenticated)
+              }}
+              />
+          )}
         </div>
-        <div>
-          <input type="password" placeholder="password"/>
-        </div>
-        <button type="submit">Login</button>
-        <button type="submit">Create Account</button>
-      </form>
-    </main>
-  );
+      </main>
+  )
 }
+
+
+
