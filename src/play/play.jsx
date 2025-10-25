@@ -1,79 +1,38 @@
 import React from 'react';
 import './play.css';
+import { myColor } from './Color';
+
+import Button from 'react-bootstrap/Button';
+
+import { playGame } from './playGame';
+import { useState } from 'react';
 
 // import { ConnectGame } from './connectGame';
+import { PickColor } from './pickColor';
 
 export function Play(props) {
 
-    const [fourFact, setFourFact] = React.useState('');
-    
-    React.useEffect(() => {
-        setFourFact("placeholder fact")
-    }, []);
+    const [myColor, setMyColor] = useState("");
+
+    console.log("in play!")
     
 
-
-  return (
-    <main>
-    <section className="color-choices">
-        <h2>Pick Your Color:</h2>
-        <ul className="colors">
-            <li className="color" style={{color: '#17197c'}}>Blue</li>
-            <li className="color" style={{color: '#d81db0'}}>Pink</li>
-            <li className="color" style={{color: 'green'}}>Green</li>
-            <li className="color" style={{color: 'yellow'}}>Yellow</li>
-            <li className="color" style={{color: '#571870'}}>Purple</li>
-            <li className="color" style={{color: 'red'}}>Red</li>
-        </ul>
-    </section>
-    <section className="game-updates">
-        You are playing with Bill.
-        <br  />
-        Bill just placed a token in the {props.pieceCol}
-        <br  />
-        It's your turn.
-    </section>
-
-    <br />
- <section className="game-board">
-     <div className="row">
-      <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-   </div>
-    <div className="row">
-        <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-    </div>
-     <div className="row">
-     <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-      <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-     </div>
-    <div className="row">
-       <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-     </div>
-    <div className="row">
-         <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-    </div>
-     <div className="row">
- <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-<div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-</div>
-</section>
-        
-        {/* onClick={() => }
-        <ConnectGame pieceCol={props.}
-    </section>
+    // const [fourFact, setFourFact] = React.useState('');
+    
+    // React.useEffect(() => {
+    //     setFourFact("placeholder fact")
+    // }, []);
 
 
+    if (myColor === "") {
+      return <PickColor setMyColor={setMyColor} />;
+    }
 
-    <br />
-    <br />
 
-    <h3>{fourFact}</h3>
-    <button type="submit">Save Game</button> */}
+    return (
+      <main>
+        <h2>your color is picked?</h2>
 
-</main>
-  );
+        </main>
+    )
 }

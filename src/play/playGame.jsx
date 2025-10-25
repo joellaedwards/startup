@@ -1,4 +1,50 @@
-// import React from 'react';
+import React from 'react';
+import { myColor } from './Color';
+
+
+export function playGame() {
+    console.log("made it to play game!")
+
+    return (   
+        <div>
+        <h2>Your color is {{myColor}}</h2>
+    <section className="game-updates">
+        You are playing with Bill.
+        <br  />
+        Bill just placed a token SOMEWHERE
+        <br  />
+        It's your turn.
+    </section>
+
+    <br />
+ <section className="game-board">
+     <div className="row">
+      <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+   </div>
+    <div className="row">
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+    </div>
+     <div className="row">
+     <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+      <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+     </div>
+    <div className="row">
+       <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+     </div>
+    <div className="row">
+         <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+    </div>
+     <div className="row">
+ <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+<div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+</div>
+</section>
+</div> )
+}
 
 
 // export function ConnectGame(props) {
