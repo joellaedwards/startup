@@ -29,6 +29,11 @@ export function Play({myColor, setMyColor}) {
 
     <br />
  <section className="game-board">
+    <div className="arrow-row">
+      <div className="arrow">↓</div><div className="arrow">↓</div><div className="arrow">↓</div>
+      <div className="arrow">↓</div><div className="arrow">↓</div><div className="arrow">↓</div>
+      <div className="arrow">↓</div>
+    </div>
      <div className="row">
       <div className="cell"></div><div className="cell"></div><div className="cell"></div>
         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>

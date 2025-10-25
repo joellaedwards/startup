@@ -28,6 +28,22 @@ main {
     padding: 10px;
 }
 
+.arrow-row {
+  display: flex;
+  justify-content: center;  /* centers the entire row */
+  gap: 0.65vw;              /* space between arrows, same as cells */
+  margin-bottom: 0.5vw;
+}
+
+.arrow {
+  width: clamp(30px, 4.5vw, 55px); /* same as .cell width */
+  text-align: center;
+  font-size: clamp(20px, 3vw, 32px);
+  color: #ffeb3b;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 
 .game-board {
   display: flex;
