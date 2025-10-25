@@ -1,7 +1,7 @@
 import React from 'react';
 import './play.css';
 
-import { ConnectGame } from './connectGame';
+// import { ConnectGame } from './connectGame';
 
 export function Play(props) {
 
@@ -15,7 +15,7 @@ export function Play(props) {
 
   return (
     <main>
-    {/* <section className="color-choices">
+    <section className="color-choices">
         <h2>Pick Your Color:</h2>
         <ul className="colors">
             <li className="color" style={{color: '#17197c'}}>Blue</li>
@@ -25,7 +25,7 @@ export function Play(props) {
             <li className="color" style={{color: '#571870'}}>Purple</li>
             <li className="color" style={{color: 'red'}}>Red</li>
         </ul>
-    </section> */}
+    </section>
     <section className="game-updates">
         You are playing with Bill.
         <br  />
@@ -35,9 +35,34 @@ export function Play(props) {
     </section>
 
     <br />
-    <section className="game-board">
+ <section className="game-board">
+     <div className="row">
+      <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+   </div>
+    <div className="row">
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+    </div>
+     <div className="row">
+     <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+      <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+     </div>
+    <div className="row">
+       <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+     </div>
+    <div className="row">
+         <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+    </div>
+     <div className="row">
+ <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+<div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+</div>
+</section>
         
-        onClick={() => }
+        {/* onClick={() => }
         <ConnectGame pieceCol={props.}
     </section>
 
@@ -47,7 +72,7 @@ export function Play(props) {
     <br />
 
     <h3>{fourFact}</h3>
-    <button type="submit">Save Game</button>
+    <button type="submit">Save Game</button> */}
 
 </main>
   );

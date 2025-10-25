@@ -7,6 +7,9 @@ import Button from 'react-bootstrap/Button';
 // so it sets userName using the props.userName from last time
 
 export function Unauthenticated(props) {
+
+    console.log("in unauthenticated.. ")
+
     const [userName, setUserName] = React.useState(props.userName);
     const [password, setPassword] = React.useState(''); // dont want to save a password
     const [displayError, setDisplayError] = React.useState(null)
@@ -27,7 +30,7 @@ export function Unauthenticated(props) {
             <div>
                 <div>
                     <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="username"/>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeohlder="password"/>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password"/>
                 </div>
                 <Button variant="primary" onClick={() => loginUser()} disabled={!userName || !password}>
                     Login
@@ -39,21 +42,6 @@ export function Unauthenticated(props) {
             
             
             </>
-
-    //       {/* <input type="text" placeholder="username"/>
-    //               <form method="get" action="play.html">
-
-    //     </div>
-    //     <div>
-    //       <input type="password" placeholder="password"/>
-    //     </div>
-    //     <button type="submit">Login</button>
-    //     <button type="submit">Create Account</button>
-    //   </form>
-    // </main> */}
-
-
-
 
     )
 

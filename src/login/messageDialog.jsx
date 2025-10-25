@@ -1,15 +1,15 @@
-import React from 'react';
+// import React from 'react';
 
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+// import Button from 'react-bootstrap/Button';
+// import Modal from 'react-bootstrap/Modal';
 
-export function MessageDialog(prop) {
-    return (
-        <Modal {...props} show={props.message} centered>
-            <Modal.Body>{props.message}</Modal.Body>
-            <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
-        </Modal>
-    )
-}
+// export function MessageDialog(prop) {
+//     return (
+//         <Modal {...props} show={props.message} centered>
+//             <Modal.Body>{props.message}</Modal.Body>
+//             <Modal.Footer>
+//                 <Button onClick={props.onHide}>Close</Button>
+//             </Modal.Footer>
+//         </Modal>
+//     )
+// }

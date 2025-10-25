@@ -5,17 +5,24 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Play } from './play/play';
 import { GameList } from './gameList/gameList';
+import { AuthState } from './login/authstate';
 
 export default function App() {
+  console.log("starting in App")
+
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+  const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currentAuthState);
+
   return (
   
     <BrowserRouter>
   
   <div className="body bg-dark text-light">
         <header>
-            <nav class="navbar">
-                <img src="connectimage.png" alt="connect4" class="nav-logo"/>
-                <ul class="navbar-nav">
+            <nav className="navbar">
+                <img src="connectimage.png" alt="connect4" className="nav-logo"/>
+                <ul className="navbar-nav">
                     <li className="nav-item me-3">
                         <NavLink className="nav-link" to="">Home</NavLink>
                     </li>
@@ -31,7 +38,16 @@ export default function App() {
 
   
 <Routes>
-  <Route path='/' element={<Login />} exact />
+  <Route path='/' element={
+                    <Login 
+                      userName={userName}
+                      authState={authState}
+                      onAuthChange={(userName, authState) => {
+                        setAuthState(authState);
+                        setUserName(userName);
+                      }}/>
+                      } 
+                      exact />
   <Route path='/play' element={<Play />} />
   <Route path='/gameList' element={<GameList />} />
   <Route path='*' element={<NotFound />} />
