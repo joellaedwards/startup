@@ -1,5 +1,4 @@
 import React from 'react';
-import { myColor } from './Color';
 
 
 export function playGame() {
@@ -7,7 +6,7 @@ export function playGame() {
 
     return (   
         <div>
-        <h2>Your color is {{myColor}}</h2>
+        <h2>Your color is a {myColor}</h2>
     <section className="game-updates">
         You are playing with Bill.
         <br  />

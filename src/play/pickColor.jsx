@@ -1,8 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-import { Color } from './Color';
-
 import { useState } from 'react';
 import { playGame } from './playGame';
 

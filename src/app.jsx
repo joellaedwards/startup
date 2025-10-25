@@ -14,6 +14,8 @@ export default function App() {
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
 
+  const [myColor, setMyColor] = React.useState("");
+
   return (
   
     <BrowserRouter>
@@ -48,7 +50,11 @@ export default function App() {
                       }}/>
                       } 
                       exact />
-  <Route path='/play' element={<Play />} />
+  <Route path='/play' element={
+                      <Play 
+                        myColor={myColor}
+                        setMyColor={setMyColor}
+                        />} />
   <Route path='/gameList' element={<GameList />} />
   <Route path='*' element={<NotFound />} />
 </Routes>
