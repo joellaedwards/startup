@@ -30,18 +30,20 @@ main {
 
 .arrow-row {
   display: flex;
-  justify-content: center;  /* centers the entire row */
-  gap: 0.65vw;              /* space between arrows, same as cells */
+  justify-content: center;
+  gap: 0.25vw;
   margin-bottom: 0.5vw;
 }
 
 .arrow {
-  width: clamp(30px, 4.5vw, 55px); /* same as .cell width */
+  width: 40px;             
+  height: 40px;            
+  font-size: 24px;         
+  font-weight: bold;        
   text-align: center;
-  font-size: clamp(20px, 3vw, 32px);
-  color: #ffeb3b;
+  border: none; 
+  color: yellow;
   cursor: pointer;
-  font-weight: bold;
 }
 
 
@@ -50,22 +52,23 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.25vw; /* space between rows */
+  gap: 0.25vw;
   padding: 1vw;
-  background: #0055a4; /* classic Connect Four blue */
+  background: #0055a4;
   border-radius: 15px;
-  width: min(80vw, 500px); /* responsive width */
+  width: min(80vw, 500px);
   margin: 0 auto;
 }
 
+
 .row {
-    display: flex;
-    justify-content: center;
-    gap: 0.25vw;
+  display: flex;
+  justify-content: center;
+  gap: 0.25vw;
 }
 
 .cell {
-  width: clamp(30px, 4.5vw, 55px);
+  width: 40px;;
   aspect-ratio: 1 / 1;
   background: white;
   border-radius: 50%;
@@ -73,8 +76,9 @@ main {
 }
 
 button {
-    padding: 0.75rem;
-    margin: 0.5rem;
+    padding: 1px;
+    margin: 1px;
+    width: 0.40px;
 }
 
 footer {

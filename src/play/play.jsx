@@ -2,6 +2,7 @@ import React from 'react';
 import './play.css';
 
 import Button from 'react-bootstrap/Button';
+import { dropPiece } from './dropPiece';
 
 import { useState } from 'react';
 
@@ -30,9 +31,9 @@ export function Play({myColor, setMyColor}) {
     <br />
  <section className="game-board">
     <div className="arrow-row">
-      <div className="arrow">↓</div><div className="arrow">↓</div><div className="arrow">↓</div>
-      <div className="arrow">↓</div><div className="arrow">↓</div><div className="arrow">↓</div>
-      <div className="arrow">↓</div>
+      <Button className="arrow" onClick={() => dropPiece(0)}>↓</Button><Button className="arrow" onClick={() => dropPiece(1)}>↓</Button><Button className="arrow" onClick={() => dropPiece(2)}>↓</Button>
+      <Button className="arrow" onClick={() => dropPiece(3)}>↓</Button><Button className="arrow" onClick={() => dropPiece(4)}>↓</Button><Button className="arrow" onClick={() => dropPiece(5)}>↓</Button>
+      <Button className="arrow" onClick={() => dropPiece(6)}>↓</Button>
     </div>
      <div className="row">
       <div className="cell"></div><div className="cell"></div><div className="cell"></div>
