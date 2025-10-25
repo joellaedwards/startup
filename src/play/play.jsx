@@ -3,17 +3,12 @@ import './play.css';
 
 import Button from 'react-bootstrap/Button';
 
-import { playGame } from './playGame';
 import { useState } from 'react';
 
 // import { ConnectGame } from './connectGame';
 import { PickColor } from './pickColor';
 
 export function Play({myColor, setMyColor}) {
-
-    console.log("in play!")
-    
-
 
     if (myColor === "") {
       return <PickColor setMyColor={setMyColor} />;
@@ -22,8 +17,44 @@ export function Play({myColor, setMyColor}) {
 
     return (
       <main>
-        <h2>your color is picked! {myColor}</h2>
+        <div>
+        <h2>Your color is a {myColor}</h2>
+    <section className="game-updates">
+        You are playing with Bill.
+        <br  />
+        Bill just placed a token SOMEWHERE
+        <br  />
+        It's your turn.
+    </section>
 
-        </main>
+    <br />
+ <section className="game-board">
+     <div className="row">
+      <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+   </div>
+    <div className="row">
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+    </div>
+     <div className="row">
+     <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+      <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+     </div>
+    <div className="row">
+       <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+        <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+     </div>
+    <div className="row">
+         <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+    </div>
+     <div className="row">
+ <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+<div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
+</div>
+</section>
+</div> 
+</main>
     )
 }

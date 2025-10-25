@@ -3,8 +3,6 @@ body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     flex-direction: column;
     color: #463cdf;
-    /* min-width: 375px;
-    min-height: 100vh; */
     margin: 0;
 }
 
@@ -27,32 +25,35 @@ main {
     justify-content: left;
     align-items: left;
     background-color: #8db7fa;
-    padding: 2rem;
+    padding: 10px;
 }
 
 
 .game-board {
-    display: flex;
-    flex-direction: column;
-    background-color: #1a1cad;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25vw; /* space between rows */
+  padding: 1vw;
+  background: #0055a4; /* classic Connect Four blue */
+  border-radius: 15px;
+  width: min(80vw, 500px); /* responsive width */
+  margin: 0 auto;
 }
 
 .row {
     display: flex;
-    flex: 1;
-    gap: 0.5vw;
+    justify-content: center;
+    gap: 0.25vw;
 }
 
 .cell {
-    flex: 1;
-    max-width: 40px;
-    max-height: 40px;
-    aspect-ratio: 1 / 1;
-    background: white;
-    border-radius: 50%;
+  width: clamp(30px, 4.5vw, 55px);
+  aspect-ratio: 1 / 1;
+  background: white;
+  border-radius: 50%;
+  margin: 2px;
 }
 
 button {
