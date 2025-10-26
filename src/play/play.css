@@ -75,10 +75,11 @@ main {
   margin: 5px;
 }
 
-/* arrow-button {
-    margin: 1px;
-    width: 0.40px;
-} */
+.error-message {
+  color: red;
+  margin-top: 1rem;
+  font-weight: bold;
+}
 
 footer {
     flex: 0 30px;

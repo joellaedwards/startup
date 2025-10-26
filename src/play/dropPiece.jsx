@@ -1,7 +1,9 @@
 import React from 'react';
 
 
-export function dropPiece(pieceCol, board, setBoard, myColor) {
+export function DropPiece(pieceCol, board, setBoard, myColor) {
+
+    const [errorMessage, setErrorMessage] = React.useState('')
 
     console.log('dropped in colNum: ' + pieceCol)
     console.log("color: " + myColor)
@@ -14,7 +16,8 @@ export function dropPiece(pieceCol, board, setBoard, myColor) {
     
     let pieceRow = isAvailable(pieceCol)
     if (pieceRow === -1) {
-        return (<h3>Column is already full. Try a different one.</h3>)
+        console.log("returning error message i hope")
+        return <p className="error-message">Column is already full. Try a different one.</p>
     }
     
 
@@ -27,9 +30,11 @@ export function dropPiece(pieceCol, board, setBoard, myColor) {
             if (!newBoard[row][pieceCol]) {
                 newBoard[row][pieceCol] = myColor;
                 setBoard(newBoard)
+                setErrorMessage('')
                 return row
             }
         }
+        setErrorMessage("column is already full. Try a different column.")
         return -1
     }
 
