@@ -9,7 +9,7 @@ import { useState } from 'react';
 // import { ConnectGame } from './connectGame';
 import { PickColor } from './pickColor';
 
-export function Play({ myColor, setMyColor, board, setBoard }) {
+export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn}) {
 
   const [errorMessage, setErrorMessage] = React.useState('')
   const [winMessage, setWinMessage] = React.useState('')
@@ -22,14 +22,20 @@ export function Play({ myColor, setMyColor, board, setBoard }) {
 
 
   function dropPiece(pieceCol) {
+    console.log('my turn here? ' + myTurn)
+    if (myTurn === false) {
+      console.log("not your turn")
+      setErrorMessage("Not your turn.");
+      return
+    }
     let pieceRow = isAvailable(pieceCol)
     if (pieceRow != -1) {
       if (isFourInARow(pieceRow, pieceCol)) {
         console.log('setting win message')
         setWinMessage("YOU WIN!")
+        return
       }
     }
-
 
   }
 
@@ -42,6 +48,9 @@ export function Play({ myColor, setMyColor, board, setBoard }) {
                 newBoard[row][pieceCol] = myColor;
                 setBoard(newBoard)
                 setErrorMessage('')
+    
+                setMyTurn(false)
+                console.log('my turn? ' + myTurn)
                 return row
             }
         }

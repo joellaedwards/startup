@@ -15,6 +15,7 @@ export default function App() {
   const [authState, setAuthState] = React.useState(currentAuthState);
 
   const [myColor, setMyColor] = React.useState("");
+  const [myTurn, setMyTurn] = React.useState(true);
 
   const ROWS = 6;
   const COLS = 7;
@@ -63,6 +64,8 @@ export default function App() {
                         setMyColor={setMyColor}
                         board={board}
                         setBoard={setBoard}
+                        myTurn={myTurn}
+                        setMyTurn={setMyTurn}
                         />} />
   <Route path='/gameList' element={<GameList />} />
   <Route path='*' element={<NotFound />} />
