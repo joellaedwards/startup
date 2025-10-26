@@ -1,10 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-import { useState } from 'react';
-
-
-
 export function PickColor({ setMyColor }) {
 
     return (
@@ -26,63 +22,4 @@ export function PickColor({ setMyColor }) {
         </ul>
     </main>
     )
-
-
-    console.log("color set as " + Color)
-
-
-    return (<h1>OH HI IT WORKS!</h1>)
-
-//     return (   
-//         <div>
-//         <h2>Your color is {color}</h2>
-//     <section className="game-updates">
-//         You are playing with Bill.
-//         <br  />
-//         Bill just placed a token SOMEWHERE
-//         <br  />
-//         It's your turn.
-//     </section>
-
-//     <br />
-//  <section className="game-board">
-//      <div className="row">
-//       <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//    </div>
-//     <div className="row">
-//         <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//     </div>
-//      <div className="row">
-//      <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//       <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//      </div>
-//     <div className="row">
-//        <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//      </div>
-//     <div className="row">
-//          <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//          <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-//     </div>
-//      <div className="row">
-//  <div className="cell"></div><div className="cell"></div><div className="cell"></div>
-// <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
-// </div>
-// </section>
-// </div> )
-        
-        {/* onClick={() => }
-        <ConnectGame pieceCol={props.}
-    </section>
-
-
-
-    <br />
-    <br />
-
-    <h3>{fourFact}</h3>
-    <button type="submit">Save Game</button> */}
-
 }
