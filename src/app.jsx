@@ -10,13 +10,18 @@ import { AuthState } from './login/authstate';
 export default function App() {
   console.log("starting in App")
 
+  const [savedGames, setSavedGames] = React.useState([
+    { gameNumber: 1, colorWon: 'red', gameDate: '2025-10-25T21:30:00Z' },
+    { gameNumber: 2, colorWon: 'yellow', gameDate: '2025-10-24T18:45:00Z' }
+  ]);
+
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
 
   const [myColor, setMyColor] = React.useState("");
   const [myTurn, setMyTurn] = React.useState(true);
-
+  
   const ROWS = 6;
   const COLS = 7;
 
@@ -66,8 +71,11 @@ export default function App() {
                         setBoard={setBoard}
                         myTurn={myTurn}
                         setMyTurn={setMyTurn}
+                        setSavedGames={setSavedGames}
+                        savedGames={savedGames}
                         />} />
-  <Route path='/gameList' element={<GameList />} />
+  <Route path='/gameList' element={<GameList 
+                                    savedGames={savedGames}/>} />
   <Route path='*' element={<NotFound />} />
 </Routes>
 

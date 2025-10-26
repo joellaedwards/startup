@@ -2,14 +2,11 @@ import React from 'react';
 import './play.css';
 
 import Button from 'react-bootstrap/Button';
-import { DropPiece } from './dropPiece';
-
-import { useState } from 'react';
 
 // import { ConnectGame } from './connectGame';
 import { PickColor } from './pickColor';
 
-export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn}) {
+export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn, savedGames, setSavedGames}) {
 
   const [errorMessage, setErrorMessage] = React.useState('')
   const [winMessage, setWinMessage] = React.useState('')
@@ -20,7 +17,16 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
     return <PickColor setMyColor={setMyColor} />;
   }
 
+  function saveGame() {
+    const newGame = {
+        gameNumber: savedGames.length + 1,
+        colorWon: myColor,
+        gameDate: new Date().toISOString
+    };
+    setSavedGames([...savedGames, newGame])
+  }
 
+  
   function dropPiece(pieceCol) {
     console.log('my turn here? ' + myTurn)
     if (myTurn === false) {
@@ -244,7 +250,8 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
             ))}
         </section>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {winMessage && <h1 className="win-message">{winMessage}</h1>}
+        {winMessage && <div class="win=actions"><h1 className="win-message">{winMessage}</h1>
+        <Button onClick={saveGame}>Save Game</Button></div>}
       </div>
     </main>
   )

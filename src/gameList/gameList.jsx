@@ -1,10 +1,10 @@
 import React from 'react';
 import './gameList.css';
 
-export function GameList() {
+export function GameList({savedGames}) {
   return (
   <main>
-    <h2>Previous Games</h2>
+    <h2>Saved Games</h2>
     <table>
         <thead>
         <tr>
@@ -13,23 +13,15 @@ export function GameList() {
             <th>Date</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>My Game</td>
-            <td>September 17, 2025</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Great Game</td>
-            <td>August 3, 2021</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Fav Game</td>
-            <td>July 3, 2020</td>
-        </tr>
-        </tbody>
+          <tbody>
+            {savedGames.map(game => (
+              <tr key={game.gameNumber}>
+                <td>{game.gameNumber}</td>
+                <td>{game.colorWon}</td>
+                <td>{new Date(game.gameDate).toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
       </table>
     </main>
   );
