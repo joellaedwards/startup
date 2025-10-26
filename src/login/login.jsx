@@ -1,15 +1,11 @@
 import React from 'react';
-
 import { Unauthenticated } from './unauthenticated';
 import { Authenticated } from './authenticated'
 import { AuthState } from './authstate';
 
 
 export function Login({ userName, authState, onAuthChange }) {
-  console.log("in login function...")
-  console.log("authstate: " + authState)
-  console.log("Authstate: " + AuthState)
-  console.log("username? " + userName)
+
   return (
     <main>
         <div>
