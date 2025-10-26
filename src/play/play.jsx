@@ -9,7 +9,7 @@ import { useState } from 'react';
 // import { ConnectGame } from './connectGame';
 import { PickColor } from './pickColor';
 
-export function Play({myColor, setMyColor}) {
+export function Play({myColor, setMyColor, board, setBoard}) {
 
     if (myColor === "") {
       return <PickColor setMyColor={setMyColor} />;
@@ -31,12 +31,12 @@ export function Play({myColor, setMyColor}) {
     <br />
  <section className="game-board">
     <div className="arrow-row">
-      <Button className="arrow" onClick={() => dropPiece(0)}>↓</Button><Button className="arrow" onClick={() => dropPiece(1)}>↓</Button><Button className="arrow" onClick={() => dropPiece(2)}>↓</Button>
-      <Button className="arrow" onClick={() => dropPiece(3)}>↓</Button><Button className="arrow" onClick={() => dropPiece(4)}>↓</Button><Button className="arrow" onClick={() => dropPiece(5)}>↓</Button>
-      <Button className="arrow" onClick={() => dropPiece(6)}>↓</Button>
+      <Button className="arrow" onClick={() => dropPiece(0, board, setBoard, myColor)}>↓</Button><Button className="arrow" onClick={() => dropPiece(1, board, myColor)}>↓</Button><Button className="arrow" onClick={() => dropPiece(2, board, myColor)}>↓</Button>
+      <Button className="arrow" onClick={() => dropPiece(3, board, setBoard, myColor)}>↓</Button><Button className="arrow" onClick={() => dropPiece(4, board, myColor)}>↓</Button><Button className="arrow" onClick={() => dropPiece(5, board, myColor)}>↓</Button>
+      <Button className="arrow" onClick={() => dropPiece(6, board, setBoard, myColor)}>↓</Button>
     </div>
      <div className="row">
-      <div className="cell"></div><div className="cell"></div><div className="cell"></div>
+      <div className="cell" style={{backgroundColor: board[0][0] || "white"}}></div><div className="cell" style={{backgroundColor: board[0][1] || "white"}}></div><div className="cell"></div>
         <div className="cell"></div><div className="cell"></div><div className="cell"></div><div className="cell"></div>
    </div>
     <div className="row">

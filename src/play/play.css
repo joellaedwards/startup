@@ -52,12 +52,12 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.25vw;
+  gap: 0.2vw;
   padding: 1vw;
   background: #0055a4;
   border-radius: 15px;
   width: min(80vw, 500px);
-  margin: 0 auto;
+  margin: 1 auto;
 }
 
 
@@ -72,14 +72,13 @@ main {
   aspect-ratio: 1 / 1;
   background: white;
   border-radius: 50%;
-  margin: 2px;
+  margin: 5px;
 }
 
-button {
-    padding: 1px;
+/* arrow-button {
     margin: 1px;
     width: 0.40px;
-}
+} */
 
 footer {
     flex: 0 30px;

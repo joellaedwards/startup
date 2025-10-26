@@ -16,6 +16,13 @@ export default function App() {
 
   const [myColor, setMyColor] = React.useState("");
 
+  const ROWS = 6;
+  const COLS = 7;
+
+    const [board, setBoard] = React.useState(
+        Array.from({ length: ROWS }, () => Array(COLS).fill(null))
+    );  
+
   return (
   
     <BrowserRouter>
@@ -54,6 +61,8 @@ export default function App() {
                       <Play 
                         myColor={myColor}
                         setMyColor={setMyColor}
+                        board={board}
+                        setBoard={setBoard}
                         />} />
   <Route path='/gameList' element={<GameList />} />
   <Route path='*' element={<NotFound />} />
