@@ -21,12 +21,12 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn, 
     const newGame = {
         gameNumber: savedGames.length + 1,
         colorWon: myColor,
-        gameDate: new Date().toISOString
+        gameDate: new Date().toISOString()
     };
     setSavedGames([...savedGames, newGame])
   }
 
-  
+
   function dropPiece(pieceCol) {
     console.log('my turn here? ' + myTurn)
     if (myTurn === false) {
@@ -55,7 +55,7 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn, 
                 setBoard(newBoard)
                 setErrorMessage('')
     
-                setMyTurn(false)
+                // setMyTurn(false)
                 console.log('my turn? ' + myTurn)
                 return row
             }
@@ -250,7 +250,7 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn, 
             ))}
         </section>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {winMessage && <div class="win=actions"><h1 className="win-message">{winMessage}</h1>
+        {winMessage && <div className="win=actions"><h1 className="win-message">{winMessage}</h1>
         <Button onClick={saveGame}>Save Game</Button></div>}
       </div>
     </main>
