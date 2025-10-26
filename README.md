@@ -89,8 +89,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] **All functionality implemented or mocked out** - I added all functionality except for the ones that will depend on database interaction and webhooks. For the list of games that will eventually use a database, I created a mock list of games that I add too and use to display the list of saved games. I commented out the part that will switch the players' turns because that will depend on the two players being able to interact with one another. Without it, I'm still able to show the functionality of completing a game, notifying who wins, and saving that game. 
+- [X] **Hooks** - I used hooks multiple times. I used useState to check and update if the user is logged in. I also used it to update the list of saved games and the color of the person playing. This was important because then the person can pick between four colors and it will stay the same. I keep track of my board using hooks. In the future when I finish implementing game play between two people, I will use it to keep track of whose turn it is as well. 
 
 ## 🚀 Service deliverable
 
