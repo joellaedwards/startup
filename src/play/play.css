@@ -81,6 +81,12 @@ main {
   font-weight: bold;
 }
 
+.win-message {
+  color: gold;
+  align-items: center;
+  text-align: center;
+}
+
 footer {
     flex: 0 30px;
     background-color: #8db7fa;

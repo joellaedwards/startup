@@ -12,14 +12,29 @@ import { PickColor } from './pickColor';
 export function Play({ myColor, setMyColor, board, setBoard }) {
 
   const [errorMessage, setErrorMessage] = React.useState('')
-    const ROWS = 6;
-    const COLS = 7;
+  const [winMessage, setWinMessage] = React.useState('')
+  const ROWS = 6;
+  const COLS = 7;
+  
   if (myColor === "") {
     return <PickColor setMyColor={setMyColor} />;
   }
 
 
   function dropPiece(pieceCol) {
+    let pieceRow = isAvailable(pieceCol)
+    if (pieceRow != -1) {
+      if (isFourInARow(pieceRow, pieceCol)) {
+        console.log('setting win message')
+        setWinMessage("YOU WIN!")
+      }
+    }
+
+
+  }
+
+
+  function isAvailable(pieceCol) {
     const newBoard = board.map(row => [...row]);
         
     for (let row = ROWS - 1; row >= 0; --row) {
@@ -27,12 +42,165 @@ export function Play({ myColor, setMyColor, board, setBoard }) {
                 newBoard[row][pieceCol] = myColor;
                 setBoard(newBoard)
                 setErrorMessage('')
-                return true
+                return row
             }
         }
         setErrorMessage("This column is already full. Try a different column.")
+        return -1
+    }
+
+
+
+
+
+    function isFourInARow(pieceRow, pieceCol) {
+
+        let numInOrder = 1;
+        for (let i = 1; i < 4; ++i) {
+           let testRow = pieceRow - i;
+            if (testRow < 0) {
+                break
+            }
+            if (board[testRow][pieceCol] == myColor) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+        let testRow = pieceRow
+        for (let i = 1; i < 4; ++i) {
+            testRow = pieceRow + i;
+            if (testRow > 5) {
+                break
+            }
+            if (board[testRow][pieceCol] == myColor) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+
+        // horizontally
+        numInOrder = 1;
+        for (let i = 1; i < 4; ++i) {
+            let testCol = pieceCol - i;
+            if (testCol < 0) {
+                break
+            }
+            if (board[pieceRow][testCol] == myColor) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+        let testCol = pieceCol
+        for (let i = 1; i < 4; ++i) {
+            testCol = pieceCol + i;
+            if (testCol > 6) {
+                break
+            }
+            if (board[pieceRow][testCol] == myColor) {
+                numInOrder = numInOrder + 1
+            }
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+        // up right
+        numInOrder = 1;
+        for (let i = 1; i < 4; ++i) {
+            testRow = pieceRow + i;
+            testCol = pieceCol + 1;
+            if (testRow > 5 || testCol > 6) {
+                break
+            }
+            if (board[testRow][testCol] == myColor) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+        // down left
+        for (let i = 1; i < 4; ++i) {
+            testRow = pieceRow - i;
+            testCol = pieceCol - i;
+            if (testRow < 0 || testCol < 0) {
+                break
+            }
+            if (board[testRow][testCol] == myColor) {
+                numInOrder = numInOrder + 1
+            }   
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
+        // up left
+        numInOrder = 1;
+        for (let i = 1; i < 4; ++i) {
+            testRow = pieceRow + i;
+            testCol = pieceCol - 1;
+            if (testRow > 5 || testCol < 0) {
+                break
+            }
+            if (board[testRow][testCol] == myColor) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+        // down right
+        for (let i = 1; i < 4; ++i) {
+            testRow = pieceRow - i;
+            testCol = pieceCol + i;
+            if (testRow < 0 || testCol > 6) {
+                break
+            }
+            if (board[testRow][testCol] == myColor) {
+                numInOrder = numInOrder + 1
+            } 
+            else {
+                break
+            }
+        }
+        if (numInOrder >= 4) {
+            return true
+        }
+
         return false
     }
+
+    
 
 
   return (
@@ -67,6 +235,7 @@ export function Play({ myColor, setMyColor, board, setBoard }) {
             ))}
         </section>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {winMessage && <h1 className="win-message">{winMessage}</h1>}
       </div>
     </main>
   )
