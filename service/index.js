@@ -1,4 +1,4 @@
-const cookieParse = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
@@ -18,12 +18,13 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 
-var apiRouter = expressRouter();
+var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-apiRouter.post('auth/creat', async(req, res) => {
+apiRouter.post('/auth/create', async(req, res) => {
+    console.log('in api creating')
     if (await findUser('username', req.body.username)) {
-        req.status(409).send({msg: 'Existing user'});
+        res.status(409).send({msg: 'Existing user'});
     } else {
         const user = await createUser(req.body.username, req.body.password);
 
@@ -33,16 +34,17 @@ apiRouter.post('auth/creat', async(req, res) => {
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
-    const user = await findUser('username', req.body.uwername);
+    console.log("in auth/login! wohoo!")
+    const user = await findUser('username', req.body.username);
     if (user) {
-        if (await bycrypt.compare(req.body.password, user.password)) {
+        if (await bcrypt.compare(req.body.password, user.password)) {
             user.token = uuid.v4();
             setAuthCookie(res, user.token);
             res.send({username: user.username});
             return;
         }
     }
-    res.setatus(401).send({ msg: 'Unauthorized'});
+    res.status(401).send({ msg: 'Unauthorized'});
 });
 
 apiRouter.delete('/auth/logout', async (req, res) => {
@@ -68,8 +70,8 @@ apiRouter.get('/games', verifyAuth, (_req, res) => {
 })
 
 apiRouter.post('/game', verifyAuth, (req, res) => {
-    scores = addGame(req.body);
-    res.send(scores);
+    games = addGame(req.body);
+    res.send(games);
 });
 
 app.use(function (err, req, res, next) {
@@ -105,5 +107,14 @@ async function createUser(username, password) {
     users.push(user);
 
     return user;
+}
+
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
 }
 
