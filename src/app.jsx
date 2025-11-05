@@ -21,13 +21,7 @@ export default function App() {
   const [board, setBoard] = React.useState(
       Array.from({ length: ROWS }, () => Array(COLS).fill(null))
   );  
-
-  // test data until connected to database
-  const [savedGames, setSavedGames] = React.useState([
-    { gameNumber: 1, colorWon: 'red', gameDate: '2025-10-25T21:30:00Z' },
-    { gameNumber: 2, colorWon: 'yellow', gameDate: '2025-10-24T18:45:00Z' }
-  ]);
-
+  
 
   return (
     <BrowserRouter>
@@ -68,13 +62,10 @@ export default function App() {
             board={board}
             setBoard={setBoard}
             myTurn={myTurn}
-            setMyTurn={setMyTurn}
-            setSavedGames={setSavedGames}
-            savedGames={savedGames}/>
+            setMyTurn={setMyTurn}/>
         } />
         <Route path='/gameList' element={
-          <GameList 
-          savedGames={savedGames}/>} />
+          <GameList />} />
         <Route path='*' element={<NotFound />} />
     </Routes>
 

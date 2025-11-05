@@ -56,20 +56,13 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     res.status(204).end();
 });
 
-const verifyAuth = async (req, res, next) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
-    if (user) {
-        next();
-    } else {
-        res.status(401).send({msg: 'Unauthorized'});
-    }
-};
-
-apiRouter.get('/games', verifyAuth, (_req, res) => {
+apiRouter.get('/games', (_req, res) => {
     res.send(games)
 })
 
-apiRouter.post('/game', verifyAuth, (req, res) => {
+apiRouter.post('/game', (req, res) => {
+    console.log("adding game!")
+    console.log("req.body: " + req.body)
     games = addGame(req.body);
     res.send(games);
 });

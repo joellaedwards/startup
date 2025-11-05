@@ -3,7 +3,7 @@ import './play.css';
 import Button from 'react-bootstrap/Button';
 import { PickColor } from './pickColor';
 
-export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn, savedGames, setSavedGames}) {
+export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn}) {
 
   const [errorMessage, setErrorMessage] = React.useState('')
   const [winMessage, setWinMessage] = React.useState('')
@@ -226,14 +226,18 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn, 
         return false
     }
 
-    function saveGame() {
+    async function saveGame() {
+        console.log("in saveGame havent called api yet though")
         const newGame = {
-            gameNumber: savedGames.length + 1,
+            
             colorWon: myColor,
             gameDate: new Date().toISOString()
         };
-        setSavedGames([...savedGames, newGame])
+
+        await fetch('/api/game', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(newGame),
+        });
     }
-
-
 }
