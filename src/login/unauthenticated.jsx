@@ -8,20 +8,16 @@ export function Unauthenticated(props) {
     const [displayError, setDisplayError] = React.useState(null)
 
     async function loginUser() {
-        console.log("in loginUser")
         loginOrCreate(`/api/auth/login`)
     }
 
     async function createUser() {
-        console.log('in createUser')
         loginOrCreate(`/api/auth/create`)
     }
 
 
 
     async function loginOrCreate(endpoint) {
-        console.log('in loginOrCreate')
-        console.log("username: ", userName)
         const response = await fetch(endpoint, {
             method: 'POST',
             body: JSON.stringify({ username: userName, password: password }),

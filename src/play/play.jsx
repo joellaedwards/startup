@@ -3,14 +3,36 @@ import './play.css';
 import Button from 'react-bootstrap/Button';
 import { PickColor } from './pickColor';
 
+
 export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn}) {
 
   const [errorMessage, setErrorMessage] = React.useState('')
   const [winMessage, setWinMessage] = React.useState('')
-  
-  if (myColor === "") {
+  const [myFact, setMyFact] = React.useState("")
+
+  React.useEffect(() => {
+    async function getFact() {
+     try {
+            const response = await fetch(`/api/mathfact`);
+            if (!response.ok) {
+                setMyFact("Error calling backend API.");
+                return
+            }
+            
+            const data = await response.json();
+            const fact = data.fact
+            setMyFact(fact);
+        } catch (err) {
+            setMyFact("Error fetchiing number fact.")
+        }
+    }
+    getFact();
+  }, []);
+
+if (myColor === "") {
     return <PickColor setMyColor={setMyColor} />;
   }
+  
 
   return (
     <main>
@@ -46,6 +68,9 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {winMessage && <div className="win=actions"><h1 className="win-message">{winMessage}</h1>
         <Button onClick={saveGame}>Save Game</Button></div>}
+      </div>
+      <div className="number-fact">
+        Your random dog fact: {myFact}
       </div>
     </main>
   )
@@ -226,18 +251,4 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
         return false
     }
 
-    async function saveGame() {
-        console.log("in saveGame havent called api yet though")
-        const newGame = {
-            
-            colorWon: myColor,
-            gameDate: new Date().toISOString()
-        };
-
-        await fetch('/api/game', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(newGame),
-        });
-    }
 }

@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.use(express.static('public'));
+app.use(express.static('./public'));
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -72,6 +72,25 @@ apiRouter.post('/game', verifyAuth, (req, res) => {
     games = addGame(req.body);
     res.send(games);
 });
+
+apiRouter.get('/mathfact', async (_req, res) => {
+    try {
+        const response = await fetch(`https://dogapi.dog/api/v2/facts`, {
+            method: 'GET'
+        });
+        if (!response.ok) {
+            return res.status(500).send({ msg: "Error calling Math Tools API" });
+        }
+
+        const data = await response.json()
+        fact = data.data[0].attributes.body
+
+        res.send({ fact });
+    } catch (err) {
+        res.status(500).send({ msg: "Failed to fetch math fact" })
+    }
+    
+})
 
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });
