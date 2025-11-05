@@ -7,7 +7,15 @@ export function GameList({}) {
 
     React.useEffect(() => {
     fetch('/api/games')
-      .then((response) => response.json())
+      .then((response) => {
+          if (response.status === 401) {
+                gameRows.push(
+                  <tr key='0'>
+                    <td colSpan='3'>Login to access your saved games!</td>
+                  </tr>
+                );
+          }
+          return response.json()})
       .then((games) => {
         setGames(games);
       });
