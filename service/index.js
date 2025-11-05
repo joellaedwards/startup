@@ -22,7 +22,6 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 apiRouter.post('/auth/create', async(req, res) => {
-    console.log('in api creating')
     if (await findUser('username', req.body.username)) {
         res.status(409).send({msg: 'Existing user'});
     } else {
@@ -34,7 +33,6 @@ apiRouter.post('/auth/create', async(req, res) => {
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
-    console.log("in auth/login! wohoo!")
     const user = await findUser('username', req.body.username);
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
@@ -56,13 +54,21 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     res.status(204).end();
 });
 
-apiRouter.get('/games', (_req, res) => {
+// TODO put this back in and make it work somehow
+const verifyAuth = async (req, res, next) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+        next();
+    } else {
+        res.status(401).send({msg: 'Unauthorized'});
+    }
+};
+
+apiRouter.get('/games', verifyAuth, (_req, res) => {
     res.send(games)
 })
 
-apiRouter.post('/game', (req, res) => {
-    console.log("adding game!")
-    console.log("req.body: " + req.body)
+apiRouter.post('/game', verifyAuth, (req, res) => {
     games = addGame(req.body);
     res.send(games);
 });
