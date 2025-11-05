@@ -96,12 +96,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - Set up index.js inside my service folder and hosted the backend on express. I set up an app using express and set it to listen on port 4000.
+- [X] **Static middleware for frontend** - I included my public folder that stores all my images. This folder had all my static files that I use for the frontend.
+- [X] **Calls to third party endpoints** - I had planned to use the numbersapi, but it's not accessible anymore so I pivoted and accessed a third party api that provides random facts about dogs.
+- [X] **Backend service endpoints** - I created backend endpoints for login, creating an account, logging out, saving a game, and accessing saved games.
+- [X] **Frontend calls service endpoints** - In order to login, logout, register, save, or view saved games, the frontend calls the endpoints I created.
+- [X] **Supports registration, login, logout, and restricted endpoint** - My website alerts users when they try to login with an incorrect username or password. It supporst registration, login, and logout. In order to view the list of saved games, a user must be signed in. 
 
 
 ## 🚀 DB deliverable
