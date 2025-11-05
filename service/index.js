@@ -68,7 +68,7 @@ apiRouter.get('/games', verifyAuth, (_req, res) => {
     res.send(games)
 })
 
-apiRouter.post('/game', verifyAuth, (req, res) => {
+apiRouter.post('/game', (req, res) => {
     games = addGame(req.body);
     res.send(games);
 });

@@ -33,6 +33,7 @@ if (myColor === "") {
     return <PickColor setMyColor={setMyColor} />;
   }
   
+  
 
   return (
     <main>
@@ -249,6 +250,21 @@ if (myColor === "") {
         }
 
         return false
+    }
+
+        async function saveGame() {
+        console.log("in saveGame havent called api yet though")
+        const newGame = {
+            
+            colorWon: myColor,
+            gameDate: new Date().toISOString()
+        };
+
+        await fetch('/api/game', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(newGame),
+        });
     }
 
 }

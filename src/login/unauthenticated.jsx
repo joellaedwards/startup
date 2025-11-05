@@ -8,7 +8,13 @@ export function Unauthenticated(props) {
     const [displayError, setDisplayError] = React.useState(null)
 
     async function loginUser() {
-        loginOrCreate(`/api/auth/login`)
+        const result = await loginOrCreate(`/api/auth/login`)
+        if (result === "Wrong username or password.") {
+            console.log("setting display error")
+            setDisplayError(result)
+        } else {
+            setDisplayError(null)
+        }
     }
 
     async function createUser() {
@@ -31,6 +37,7 @@ export function Unauthenticated(props) {
         } else {
             const body = await response.json();
             console.log(`Error: ${body.msg}`);
+            return "Wrong username or password."
         }
     }
 
@@ -49,6 +56,7 @@ export function Unauthenticated(props) {
             <Button variant="primary" onClick={() => createUser()} disabled={!userName || !password}>
                 Create
             </Button>
+            {displayError && (<div style={{ color: 'red', marginTop: '10px' }}>{displayError}</div>)}
         </div>    
         </>
     )
