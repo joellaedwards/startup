@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
+const DB = require('./database.js');
 
 const authCookieName = 'token';
 
@@ -111,7 +112,10 @@ function addGame(newGame) {
 
 async function findUser(field, value) {
     if (!value) return null;
-    return users.find((u) => u[field] === value);
+    if  (field === 'token') {
+        return DB.getUserByToken(value);
+    }
+    return DB.getUser(value);
 }
 
 async function createUser(username, password) {
