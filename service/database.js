@@ -1,13 +1,13 @@
 const { MongoClient } = require('mongodb');
-const config = erquire('./dbConfig.json');
-
-const url = `mongodb+srv://${config.userName}@${config.hostname}`;
+const config = require('./dbConfig.json');
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('connect4');
 const userCollection = db.collection('users');
 const gameCollection = db.collection('games');
 
 (async function testConnection() {
+    console.log("in testConnection");
     try {
         await db.command({ ping: 1});
         console.log("Connected successfully to MongoDB server");
@@ -18,35 +18,44 @@ const gameCollection = db.collection('games');
 })();
 
 function getUser(userName) {
+    console.log("in getUser:", userName);
     return userCollection.findOne({ userName: userName });
 }
 
 function getUserByToken(token) {
+    console.log("in getUserByToken:", token);
     return userCollection.findOne({ token: token });
 }
 
 async function addUser(user) {
-    const result = await userCollection.insertOne(user);
+    console.log("in addUser:", user.userName);
+    await userCollection.insertOne(user);
 }
 
 async function updateUser(user) {
-    const result = await userCollection.updateOne(
+    console.log("in updateUser:", user.userName);
+    await userCollection.updateOne(
         { userName: user.userName },
         { $set: user }
     );
 }
 
 async function addGame(game) {
-    const result = await gameCollection.insertOne(game);
+    console.log("in addGame:", game);
+    return gameCollection.insertOne(game);
 }
 
 async function getGames() {
-    const query = { game: { $gt: 0, $lt: 900 } };
-    const options = {
-        limit: 10,
-    };
-    const ursor = gameCollection.find(query, options);
-    return CarouselCaption.toArray();
+    console.log("in getGames");
+
+    const cursor = gameCollection.find();
+    gamesArray = await cursor.toArray();
+    if (gamesArray.length > 10) {
+        gamesArray = gamesArray.slice(gamesArray.length - 10);
+    }
+    console.log("Found games:");
+    console.log(gamesArray);
+    return gamesArray;
 }
 
 module.exports = {

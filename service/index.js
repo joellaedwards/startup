@@ -38,6 +38,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
             user.token = uuid.v4();
+            await DB.updateUser(user);
             setAuthCookie(res, user.token);
             res.send({username: user.username});
             return;
@@ -50,6 +51,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
         delete user.token;
+        await DB.updateUser(user);
     }
     res.clearCookie(authCookieName);
     res.status(204).end();
@@ -65,7 +67,9 @@ const verifyAuth = async (req, res, next) => {
     }
 };
 
-apiRouter.get('/games', verifyAuth, (_req, res) => {
+apiRouter.get('/games', verifyAuth, async (_req, res) => {
+    const games = await DB.getGames();
+    console.log("games retrieved!!!!", games);
     res.send(games)
 })
 
@@ -101,12 +105,9 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-function addGame(newGame) {
-    games.push(newGame);
-    if (games.length > 10) {
-        games.length = 10;
-    }
-    return games;
+async function addGame(newGame) {
+    await DB.addGame(newGame);
+    return await DB.getGames();
 }
 
 
@@ -126,7 +127,7 @@ async function createUser(username, password) {
         password: passwordHash,
         token: uuid.v4(),
     };
-    users.push(user);
+    await DB.addUser(user);
 
     return user;
 }
