@@ -2,13 +2,19 @@ const { MongoClient } = require('mongodb');
 const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('connect4');
-const userCollection = db.collection('users');
-const gameCollection = db.collection('games');
+// const db = client.db('connect4');
+// const userCollection = db.collection('users');
+// const gameCollection = db.collection('games');
+
+let db, userCollection, gameCollection;
 
 (async function testConnection() {
     console.log("in testConnection");
     try {
+        await client.connect();
+        db = client.db('connect4');
+        userCollection = db.collection('users');
+        gameCollection = db.collection('games');
         await db.command({ ping: 1});
         console.log("Connected successfully to MongoDB server");
     } catch (err) {
