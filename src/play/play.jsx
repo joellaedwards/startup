@@ -3,6 +3,9 @@ import './play.css';
 import Button from 'react-bootstrap/Button';
 import { PickColor } from './pickColor';
 import { useParams } from 'react-router-dom';
+// import WebSocket from 'ws'
+
+
 
 
 
@@ -24,10 +27,10 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
     // wsRef.current = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
 
     // connect to backend websocket
-    wsRef.current = new Websocket('ws://localhost:4000/ws')
+    wsRef.current = new WebSocket('ws://localhost:4000/ws')
 
     wsRef.current.onopen = () => {
-        console.log("backend websocket connected!!")
+        console.log("backend websocket connected!! from play function")
     }
     wsRef.current.onmessage = (event) => {
 
