@@ -27,29 +27,33 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
     // wsRef.current = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
 
     // connect to backend websocket
-    wsRef.current = new WebSocket('ws://localhost:4000/ws')
+    if (!window.gameSocket) {
+        window.gameSocket = new WebSocket('ws://localhost:4000/ws')
+        // wsRef.current = new WebSocket('ws://localhost:4000/ws')
 
-    wsRef.current.onopen = () => {
-        console.log("backend websocket connected!! from play function")
-    }
-    wsRef.current.onmessage = (event) => {
+        window.gameSocket.onopen = () => {
+            console.log("backend websocket connected!! from play function")
+        }
+        window.gameSocket.onmessage = (event) => {
 
-        console.log("received message: ", event.data)
-        const data = JSON.parse(event.data)
+            console.log("received message: ", event.data)
+            const data = JSON.parse(event.data)
 
-        if (data.type === "status") {
-            console.log("server status:", data.message)
+            if (data.type === "status") {
+                console.log("server status:", data.message)
+            }
+
+            if (data.type === "opponentMove") {
+                const col = data.column;
+                setBoard(applyOpponentMove(col));
+
+                setMyTurn(true)
+            }
         }
 
-        if (data.type === "opponentMove") {
-            const col = data.column;
-            setBoard(applyOpponentMove(col));
+        window.gameSocket.onclose = () => console.log('connection closed.')
 
-            setMyTurn(true)
-        }
     }
-
-
   })
 
   console.log("current game id in play: " + gameId)
@@ -72,7 +76,7 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
         }
     }
     getFact();
-  }, [gameId]);
+  }, []);
 
 if (myColor === "") {
     return <PickColor setMyColor={setMyColor} />;
@@ -144,7 +148,7 @@ if (myColor === "") {
     let pieceRow = isAvailable(pieceCol)
     if (pieceRow != -1) {
       setMyTurn(false)
-      wsRef.current.send(JSON.stringify({
+      window.gameSocket.send(JSON.stringify({
         type: "move",
         column: pieceCol
       }))
