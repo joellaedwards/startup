@@ -16,16 +16,18 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
 
   const wsRef = React.useRef(null)
   console.log("setup wsRef")
-
+// TODO working right here!
 
   React.useEffect(() => {
-    let port = window.location.port;
-    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    wsRef.current = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+    // let port = window.location.port;
+    // const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    // wsRef.current = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
 
+    // connect to backend websocket
+    wsRef.current = new Websocket('ws://localhost:4000/ws')
 
     wsRef.current.onopen = () => {
-        console.log("websocket connected!!")
+        console.log("backend websocket connected!!")
     }
     wsRef.current.onmessage = (event) => {
 
