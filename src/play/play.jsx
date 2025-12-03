@@ -14,6 +14,7 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
   console.log('in play function')
   const [errorMessage, setErrorMessage] = React.useState('')
   const [winMessage, setWinMessage] = React.useState('')
+  const [loseMessage, setLoseMessage] = React.useState('')
   const [myFact, setMyFact] = React.useState("")
   const { gameId } = useParams();
 
@@ -40,14 +41,26 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
             const data = JSON.parse(event.data)
 
             if (data.type === "status") {
+
                 console.log("server status:", data.message)
             }
 
-            if (data.type === "opponentMove") {
-                const col = data.column;
-                setBoard(applyOpponentMove(col));
-
+            if (data.type === "turn") {
                 setMyTurn(true)
+            }
+
+            if (data.type === "opponentMove") {
+                console.log("opponent move received in front end")
+                const col = data.column;
+                const row = data.row;
+                console.log("column: ", data.column)
+                setMyTurn(true)
+                applyOpponentMove(row, col);
+
+            }
+
+            if (data.type === "lose") {
+                setLoseMessage("Sorry, you lost.")
             }
         }
 
@@ -119,6 +132,8 @@ if (myColor === "") {
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {winMessage && <div className="win=actions"><h1 className="win-message">{winMessage}</h1>
         <Button onClick={saveGame}>Save Game</Button></div>}
+        {loseMessage && <div className="lose=actions"><h1 className="lose-message">{loseMessage}</h1>
+        <Button onClick={saveGame}>Save Game</Button></div>}
       </div>
       <div className="number-fact">
         Your random dog fact: {myFact}
@@ -129,15 +144,18 @@ if (myColor === "") {
     </main>
   )
 
-  function applyOpponentMove(prevBoard, pieceCol) {
-    const newBoard = prevBoard.map(row => [...row]);
-    for (let row = 5; row >= 0; --row) {
-        if (!newBoard[row][pieceCol]) {
-            newBoard[row][pieceCol] = "black"
-            break;
+  function applyOpponentMove(pieceRow, pieceCol) {
+
+    console.log("applying opponents move...")
+
+    setBoard(prev => {
+        const newBoard = prev.map(row => [...row])
+        for (let row = 5; row >= 0; --row) {
+            newBoard[pieceRow][pieceCol] = "black"
+            break
         }
-    }
-    return newBoard;
+        return newBoard
+    })
   }
 
   function dropPiece(pieceCol) {
@@ -148,11 +166,16 @@ if (myColor === "") {
     let pieceRow = isAvailable(pieceCol)
     if (pieceRow != -1) {
       setMyTurn(false)
+      console.log("sending message type move")
       window.gameSocket.send(JSON.stringify({
         type: "move",
-        column: pieceCol
+        column: pieceCol,
+        row: pieceRow
       }))
       if (isFourInARow(pieceRow, pieceCol)) {
+        window.gameSocket.send(JSON.stringify({
+                type: "WIN"
+        }))        
         setWinMessage("YOU WIN!")
         return
       }
@@ -160,6 +183,19 @@ if (myColor === "") {
   }
 
   function isAvailable(pieceCol) {
+
+    setBoard(prev => {
+        const newBoard = prev.map(row => [...row])
+
+        for (let row = 5; row >= 0; --row) {
+            if (!newBoard[row][pieceCol]) {
+                newBoard[row][pieceCol] = myColor;
+                break;
+            }
+        }
+        return newBoard
+    })
+
     const newBoard = board.map(row => [...row]);
     for (let row = 5; row >= 0; --row) {
             if (!newBoard[row][pieceCol]) {

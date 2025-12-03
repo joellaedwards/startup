@@ -14,7 +14,7 @@ export default function App() {
   const [authState, setAuthState] = React.useState(currentAuthState);
 
   const [myColor, setMyColor] = React.useState("");
-  const [myTurn, setMyTurn] = React.useState(true);
+  const [myTurn, setMyTurn] = React.useState(false);
 
   const ROWS = 6;
   const COLS = 7;

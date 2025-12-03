@@ -2,39 +2,51 @@ const { WebSocketServer, WebSocket } = require('ws')
 
 function peerProxy(httpServer) {
     console.log("in peer proxy")
-    // this is the backend so it'll be ws not wss and it will be http because my backend is just on
-    // localhost:4000
+
     const socketServer = new WebSocketServer({ server: httpServer })
 
     let player1 = null
     let player2 = null
+    let currTurn = 1
 
     socketServer.on('connection', (socket) => {
-        console.log("socket is connected wohoo!")
-
 
         if (!player1) {
-            console.log("player1 joined")
             player1 = socket
             socket.send(JSON.stringify({ type: 'status', message: 'waiting_for_player'}))
         } else if (!player2) {
-            console.log("player2 joined")
             player2 = socket
             player2.send(JSON.stringify({ type: 'status', message: 'lets_play'}))
             player1.send(JSON.stringify({ type: 'status', message: 'lets_play'}))
+            player1.send(JSON.stringify({ type: 'turn', message: 'your_turn'}))
         } else {
-            console.log('oh no the games full')
             socket.send(JSON.stringify({ type: 'full' }))
             socket.close()
             return
         }
 
-        socketServer.on('message', function message(data) {
-            socketServer.clients.forEach((client) => {
-                if (client !== socket && client.readyState === WebSocket.OPEN) {
-                    client.send(data)
+        socket.on('message', (raw) => {
+            const msg = JSON.parse(raw)
+            if (msg.type === 'move') {
+                if (currTurn === 1) {
+                    currTurn = 2
+                    player2.send(JSON.stringify({ type: 'opponentMove', column: msg.column, row: msg.row }))
+                } else if (currTurn === 2) {
+                    currTurn = 1
+                    player1.send(JSON.stringify({ type: 'opponentMove', column: msg.column, row: msg.row }))
                 }
-            })
+            } else if (msg.type === "WIN") {
+                if (currTurn === 2) {
+                    console.log("player 1 won i think")
+                    player2.send(JSON.stringify({ type: 'lose' }))
+                } else if (currTurn === 1) {
+                    console.log("player 2 won i think")
+                    player1.send(JSON.stringify({ type: 'lose' }))
+                }
+            }
+
+
+
         })
 
         socket.on('close', () => {
