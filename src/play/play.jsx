@@ -2,13 +2,53 @@ import React from 'react';
 import './play.css';
 import Button from 'react-bootstrap/Button';
 import { PickColor } from './pickColor';
+import { useParams } from 'react-router-dom';
+
 
 
 export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn}) {
 
+  console.log('in play function')
   const [errorMessage, setErrorMessage] = React.useState('')
   const [winMessage, setWinMessage] = React.useState('')
   const [myFact, setMyFact] = React.useState("")
+  const { gameId } = useParams();
+
+  const wsRef = React.useRef(null)
+  console.log("setup wsRef")
+
+
+  React.useEffect(() => {
+    let port = window.location.port;
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    wsRef.current = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+
+
+    wsRef.current.onopen = () => {
+        console.log("websocket connected!!")
+    }
+    wsRef.current.onmessage = (event) => {
+
+        console.log("received message: ", event.data)
+        const data = JSON.parse(event.data)
+
+        if (data.type === "status") {
+            console.log("server status:", data.message)
+        }
+
+        if (data.type === "opponentMove") {
+            const col = data.column;
+            setBoard(applyOpponentMove(col));
+
+            setMyTurn(true)
+        }
+    }
+
+
+  })
+
+  console.log("current game id in play: " + gameId)
+  let currURL = window.location.href
 
   React.useEffect(() => {
     async function getFact() {
@@ -27,18 +67,19 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
         }
     }
     getFact();
-  }, []);
+  }, [gameId]);
 
 if (myColor === "") {
     return <PickColor setMyColor={setMyColor} />;
   }
   
-  
 
   return (
     <main>
-      <div>
-        <h2>Your color is a {myColor}</h2>
+      <div>        
+      <div className="share-link">
+        Share this link to play with a friend! {currURL}
+      </div>
         <section className="game-updates">
           You are playing with Bill.
           <br />
@@ -73,8 +114,22 @@ if (myColor === "") {
       <div className="number-fact">
         Your random dog fact: {myFact}
       </div>
+
+
+      
     </main>
   )
+
+  function applyOpponentMove(prevBoard, pieceCol) {
+    const newBoard = prevBoard.map(row => [...row]);
+    for (let row = 5; row >= 0; --row) {
+        if (!newBoard[row][pieceCol]) {
+            newBoard[row][pieceCol] = "black"
+            break;
+        }
+    }
+    return newBoard;
+  }
 
   function dropPiece(pieceCol) {
     if (myTurn === false) {
@@ -83,6 +138,11 @@ if (myColor === "") {
     }
     let pieceRow = isAvailable(pieceCol)
     if (pieceRow != -1) {
+      setMyTurn(false)
+      wsRef.current.send(JSON.stringify({
+        type: "move",
+        column: pieceCol
+      }))
       if (isFourInARow(pieceRow, pieceCol)) {
         setWinMessage("YOU WIN!")
         return

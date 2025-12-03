@@ -88,6 +88,12 @@ main {
   text-align: center;
 
 }
+.share-link {
+  margin: 0 auto;
+  padding: 20px;
+  color: black;
+  text-align: center;
+}
 
 .win-message {
   color: gold;

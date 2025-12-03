@@ -55,14 +55,15 @@ export default function App() {
             setUserName(userName);
           }}/>
         }  exact />
-        <Route path='/play' element={
+        <Route path='/play/:gameId' element={
           <Play 
             myColor={myColor}
             setMyColor={setMyColor}
             board={board}
             setBoard={setBoard}
             myTurn={myTurn}
-            setMyTurn={setMyTurn}/>
+            setMyTurn={setMyTurn}
+            />
         } />
         <Route path='/gameList' element={
           <GameList />} />

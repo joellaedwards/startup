@@ -2,10 +2,10 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
+const { nanoid } = require('nanoid');
 const app = express();
 const DB = require('./database.js');
 const { peerProxy } = require('./peerProxy.js')
-const crypto = require('crypto');
 
 const authCookieName = 'token';
 
@@ -71,7 +71,7 @@ const verifyAuth = async (req, res, next) => {
 
 apiRouter.post('/new-game', async (_req, res) => {
     console.log("calling new-game")
-    const id = crypto.randomUUID();
+    const id = nanoid(10);
     console.log("uuid here: ", id)
     res.json({ gameId: id });
 })
@@ -155,3 +155,19 @@ const httpService = app.listen(port, () => {
 });
 
 peerProxy(httpService);
+
+
+
+// const express = require('express');
+// const { peerProxy } = require('./peerProxy');
+
+// const app = express();
+// const port = 4000;
+
+// // Simple HTTP route so server is alive
+// app.get('/', (_req, res) => res.send('Hello World!'));
+
+// const server = app.listen(port, () => console.log(`HTTP server running on http://localhost:${port}`));
+
+// // Attach WebSocket server
+// peerProxy(server);
