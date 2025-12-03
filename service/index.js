@@ -4,6 +4,8 @@ const express = require('express');
 const uuid = require('uuid');
 const app = express();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js')
+const crypto = require('crypto');
 
 const authCookieName = 'token';
 
@@ -67,6 +69,13 @@ const verifyAuth = async (req, res, next) => {
     }
 };
 
+apiRouter.post('/new-game', async (_req, res) => {
+    console.log("calling new-game")
+    const id = crypto.randomUUID();
+    console.log("uuid here: ", id)
+    res.json({ gameId: id });
+})
+
 apiRouter.get('/games', verifyAuth, async (_req, res) => {
     const games = await DB.getGames();
     console.log("games retrieved!!!!", games);
@@ -102,7 +111,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
+  res.sendFile('index.html', { root: './public' });
 });
 
 async function addGame(newGame) {
@@ -141,6 +150,8 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+peerProxy(httpService);
