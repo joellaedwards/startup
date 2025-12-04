@@ -46,9 +46,11 @@ function peerProxy(httpServer) {
             if (socket === player1) {
                 player1 = null
                 console.log("player1 quit")
+                currTurn = 1
             } else if (socket === player2) {
                 player2 = null
                 console.log("player2 quit")
+                currTurn = 1
             }
         })   
     })

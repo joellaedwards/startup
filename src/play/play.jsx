@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn}) {
 
-    
+
   const [errorMessage, setErrorMessage] = React.useState('')
   const [winMessage, setWinMessage] = React.useState('')
   const [loseMessage, setLoseMessage] = React.useState('')
@@ -20,64 +20,44 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
     let port = window.location.port;
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 
-    console.log("port: ", port)
-    console.log("protocol: ", protocol)
-
-    // console.log("port: ", port)
-    // console.log("protocol: ", protocol)
-    // console.log()
-    // wsRef.current = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
-
     if (!window.gameSocket) {
         window.gameSocket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
 
     }
 
-    // connect to backend websocket
-    // if (!window.gameSocket) {
-        // window.gameSocket = new WebSocket('ws://localhost:4000/ws')
-        // wsRef.current = new WebSocket('ws://localhost:4000/ws')
+    window.gameSocket.onopen = () => {
+        console.log("backend websocket connected!! from play function")
+    }
 
+    window.gameSocket.onmessage = (event) => {
 
-        // wsRef.current.onopen = () => {
-        window.gameSocket.onopen = () => {
-            console.log("backend websocket connected!! from play function")
+        console.log("received message: ", event.data)
+        const data = JSON.parse(event.data)
+
+        if (data.type === "status") {
+            console.log("server status:", data.message)
         }
 
-        // wsRef.current.onmessage = (event) => {
-        window.gameSocket.onmessage = (event) => {
-
-            console.log("received message: ", event.data)
-            const data = JSON.parse(event.data)
-
-            if (data.type === "status") {
-
-                console.log("server status:", data.message)
-            }
-
-            if (data.type === "turn") {
-                setMyTurn(true)
-            }
-
-            if (data.type === "opponentMove") {
-                console.log("opponent move received in front end")
-                const col = data.column;
-                const row = data.row;
-                console.log("column: ", data.column)
-                setMyTurn(true)
-                applyOpponentMove(row, col);
-
-            }
-
-            if (data.type === "lose") {
-                setLoseMessage("Sorry, you lost.")
-            }
+        if (data.type === "turn") {
+            setMyTurn(true)
         }
 
-        window.gameSocket.onclose = () => console.log('connection closed.')
-        // wsRef.current.onclose = () => console.log('connection closed.')
+        if (data.type === "opponentMove") {
+            console.log("opponent move received in front end")
+            const col = data.column;
+            const row = data.row;
+            setMyTurn(true)
+            applyOpponentMove(row, col);
 
-    // }
+        }
+
+        if (data.type === "lose") {
+            setLoseMessage("Sorry, you lost.")
+        }
+    }
+
+    window.gameSocket.onclose = () => console.log('connection closed.')
+
   })
 
   console.log("current game id in play: " + gameId)
@@ -105,7 +85,6 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
 if (myColor === "") {
     return <PickColor setMyColor={setMyColor} />;
   }
-  
 
   return (
     <main>
@@ -156,9 +135,6 @@ if (myColor === "") {
   )
 
   function applyOpponentMove(pieceRow, pieceCol) {
-
-    console.log("applying opponents move...")
-
     setBoard(prev => {
         const newBoard = prev.map(row => [...row])
         for (let row = 5; row >= 0; --row) {
@@ -177,16 +153,13 @@ if (myColor === "") {
     let pieceRow = isAvailable(pieceCol)
     if (pieceRow != -1) {
       setMyTurn(false)
-      console.log("sending message type move")
 
-        // wsRef.current.send(JSON.stringify({
       window.gameSocket.send(JSON.stringify({
         type: "move",
         column: pieceCol,
         row: pieceRow
       }))
       if (isFourInARow(pieceRow, pieceCol)) {
-        // wsRef.current.send(JSON.stringify({
         window.gameSocket.send(JSON.stringify({
                 type: "WIN"
         }))        
@@ -200,7 +173,6 @@ if (myColor === "") {
 
     setBoard(prev => {
         const newBoard = prev.map(row => [...row])
-
         for (let row = 5; row >= 0; --row) {
             if (!newBoard[row][pieceCol]) {
                 newBoard[row][pieceCol] = myColor;
@@ -216,9 +188,6 @@ if (myColor === "") {
                 newBoard[row][pieceCol] = myColor;
                 setBoard(newBoard)
                 setErrorMessage('')
-    
-                // setMyTurn(false)
-                // uncomment after webhook is set up. leave commented out now for testing four in a row and save game
                 return row
             }
         }
