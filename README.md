@@ -115,8 +115,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [X] **Backend listens for WebSocket connection** - The backend listens for a WebSocket connection and handles which player's turn it is. It also receives information when one player wins and sends that to the other player. There is one WebSocket on the backend that communicates between the two frontends. 
+- [X] **Frontend makes WebSocket connection** - The frontend has a WebSocket connection. There is one frontend Websocket for each person playing.
+- [X] **Data sent over WebSocket connection** - When a player drops a piece, the row and column of the piece are sent to the backend WebSocket and then forwarded to the frontend to be displayed on the other player's board.
+- [X] **WebSocket data displayed** - The data about where the other player placed a piece is displayed as a black piece no matter what color the other player chose so the user doesn't forget which color they are. 
+- [X] **Application is fully functional** - I fixed the login/logout issues and the entire website now works!!

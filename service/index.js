@@ -24,9 +24,9 @@ app.use(express.static('./public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-apiRouter.post('/auth/create', async(req, res) => {
+apiRouter.post('/auth/create', async (req, res) => {
     if (await findUser('username', req.body.username)) {
-        res.status(409).send({msg: 'Existing user'});
+        res.status(409).send({ msg: 'Existing user' });
     } else {
         const user = await createUser(req.body.username, req.body.password);
 
@@ -42,11 +42,11 @@ apiRouter.post('/auth/login', async (req, res) => {
             user.token = uuid.v4();
             await DB.updateUser(user);
             setAuthCookie(res, user.token);
-            res.send({username: user.username});
+            res.send({ username: user.username });
             return;
         }
     }
-    res.status(401).send({ msg: 'Unauthorized'});
+    res.status(401).send({ msg: 'Unauthorized' });
 });
 
 apiRouter.delete('/auth/logout', async (req, res) => {
@@ -65,20 +65,17 @@ const verifyAuth = async (req, res, next) => {
     if (user) {
         next();
     } else {
-        res.status(401).send({msg: 'Unauthorized'});
+        res.status(401).send({ msg: 'Unauthorized' });
     }
 };
 
 apiRouter.post('/new-game', async (_req, res) => {
-    console.log("calling new-game")
     const id = nanoid(10);
-    console.log("uuid here: ", id)
     res.json({ gameId: id });
 })
 
 apiRouter.get('/games', verifyAuth, async (_req, res) => {
     const games = await DB.getGames();
-    console.log("games retrieved!!!!", games);
     res.send(games)
 })
 
@@ -103,19 +100,19 @@ apiRouter.get('/mathfact', async (_req, res) => {
     } catch (err) {
         res.status(500).send({ msg: "Failed to fetch math fact" })
     }
-    
+
 })
 
 app.use(function (err, req, res, next) {
-  res.status(500).send({ type: err.name, message: err.message });
+    res.status(500).send({ type: err.name, message: err.message });
 });
 
 app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
-// ^^ for deploying 
+    // ^^ for deployment
 
-//   for local testing     
-//   res.sendFile('index.html', { root: '../' });
+    //   for local testing     
+    //   res.sendFile('index.html', { root: '../' });
 });
 
 async function addGame(newGame) {
@@ -126,10 +123,12 @@ async function addGame(newGame) {
 
 async function findUser(field, value) {
     if (!value) return null;
-    if  (field === 'token') {
+    if (field === 'token') {
         return DB.getUserByToken(value);
     }
-    return DB.getUser(value);
+
+    getUserVal = await DB.getUser(value)
+    return getUserVal
 }
 
 async function createUser(username, password) {
@@ -146,32 +145,18 @@ async function createUser(username, password) {
 }
 
 function setAuthCookie(res, authToken) {
-  res.cookie(authCookieName, authToken, {
-    maxAge: 1000 * 60 * 60 * 24 * 365,
-    secure: true,
-    httpOnly: true,
-    sameSite: 'strict',
-  });
+    res.cookie(authCookieName, authToken, {
+        maxAge: 1000 * 60 * 60 * 24 * 365,
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
+    });
 }
 
 const httpService = app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });
 
 peerProxy(httpService);
 
 
-
-// const express = require('express');
-// const { peerProxy } = require('./peerProxy');
-
-// const app = express();
-// const port = 4000;
-
-// // Simple HTTP route so server is alive
-// app.get('/', (_req, res) => res.send('Hello World!'));
-
-// const server = app.listen(port, () => console.log(`HTTP server running on http://localhost:${port}`));
-
-// // Attach WebSocket server
-// peerProxy(server);
