@@ -1,8 +1,6 @@
 const { WebSocketServer, WebSocket } = require('ws')
 
 function peerProxy(httpServer) {
-    console.log("in peer proxy")
-
     const socketServer = new WebSocketServer({ server: httpServer })
 
     let player1 = null
@@ -37,21 +35,14 @@ function peerProxy(httpServer) {
                 }
             } else if (msg.type === "WIN") {
                 if (currTurn === 2) {
-                    console.log("player 1 won i think")
                     player2.send(JSON.stringify({ type: 'lose' }))
                 } else if (currTurn === 1) {
-                    console.log("player 2 won i think")
                     player1.send(JSON.stringify({ type: 'lose' }))
                 }
             }
-
-
-
         })
 
         socket.on('close', () => {
-            console.log('player disconnected')
-
             if (socket === player1) {
                 player1 = null
                 console.log("player1 quit")
@@ -59,14 +50,8 @@ function peerProxy(httpServer) {
                 player2 = null
                 console.log("player2 quit")
             }
-        })
-
-
-        
+        })   
     })
-
-
-
 
 }
 

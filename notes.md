@@ -12,6 +12,8 @@
 
 SSH in: ssh -i C:\Users\joell\OneDrive\Desktop\260keypair.pem ubuntu@44.217.195.141
 
+ssh -i C:\Users\joell\260\260keypair.pem ubuntu@44.217.195.141
+
 My IP address is: 44.217.195.141
 Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
 

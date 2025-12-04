@@ -3,15 +3,10 @@ import './play.css';
 import Button from 'react-bootstrap/Button';
 import { PickColor } from './pickColor';
 import { useParams } from 'react-router-dom';
-// import WebSocket from 'ws'
-
-
-
-
 
 export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn}) {
 
-  console.log('in play function')
+    
   const [errorMessage, setErrorMessage] = React.useState('')
   const [winMessage, setWinMessage] = React.useState('')
   const [loseMessage, setLoseMessage] = React.useState('')
@@ -20,21 +15,36 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
 
   const wsRef = React.useRef(null)
   console.log("setup wsRef")
-// TODO working right here!
 
   React.useEffect(() => {
-    // let port = window.location.port;
-    // const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    let port = window.location.port;
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+
+    console.log("port: ", port)
+    console.log("protocol: ", protocol)
+
+    // console.log("port: ", port)
+    // console.log("protocol: ", protocol)
+    // console.log()
     // wsRef.current = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
 
-    // connect to backend websocket
     if (!window.gameSocket) {
-        window.gameSocket = new WebSocket('ws://localhost:4000/ws')
+        window.gameSocket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+
+    }
+
+    // connect to backend websocket
+    // if (!window.gameSocket) {
+        // window.gameSocket = new WebSocket('ws://localhost:4000/ws')
         // wsRef.current = new WebSocket('ws://localhost:4000/ws')
 
+
+        // wsRef.current.onopen = () => {
         window.gameSocket.onopen = () => {
             console.log("backend websocket connected!! from play function")
         }
+
+        // wsRef.current.onmessage = (event) => {
         window.gameSocket.onmessage = (event) => {
 
             console.log("received message: ", event.data)
@@ -65,8 +75,9 @@ export function Play({ myColor, setMyColor, board, setBoard, myTurn, setMyTurn})
         }
 
         window.gameSocket.onclose = () => console.log('connection closed.')
+        // wsRef.current.onclose = () => console.log('connection closed.')
 
-    }
+    // }
   })
 
   console.log("current game id in play: " + gameId)
@@ -167,12 +178,15 @@ if (myColor === "") {
     if (pieceRow != -1) {
       setMyTurn(false)
       console.log("sending message type move")
+
+        // wsRef.current.send(JSON.stringify({
       window.gameSocket.send(JSON.stringify({
         type: "move",
         column: pieceCol,
         row: pieceRow
       }))
       if (isFourInARow(pieceRow, pieceCol)) {
+        // wsRef.current.send(JSON.stringify({
         window.gameSocket.send(JSON.stringify({
                 type: "WIN"
         }))        

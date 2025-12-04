@@ -111,7 +111,11 @@ app.use(function (err, req, res, next) {
 });
 
 app.use((_req, res) => {
-  res.sendFile('index.html', { root: '../' });
+    res.sendFile('index.html', { root: 'public' });
+// ^^ for deploying 
+
+//   for local testing     
+//   res.sendFile('index.html', { root: '../' });
 });
 
 async function addGame(newGame) {
