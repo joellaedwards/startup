@@ -11,12 +11,12 @@ function peerProxy(httpServer) {
 
         if (!player1) {
             player1 = socket
-            socket.send(JSON.stringify({ type: 'status', message: 'waiting_for_player'}))
+            socket.send(JSON.stringify({ type: 'status', message: 'waiting_for_player' }))
         } else if (!player2) {
             player2 = socket
-            player2.send(JSON.stringify({ type: 'status', message: 'lets_play'}))
-            player1.send(JSON.stringify({ type: 'status', message: 'lets_play'}))
-            player1.send(JSON.stringify({ type: 'turn', message: 'your_turn'}))
+            player2.send(JSON.stringify({ type: 'status', message: 'lets_play' }))
+            player1.send(JSON.stringify({ type: 'status', message: 'lets_play' }))
+            player1.send(JSON.stringify({ type: 'turn', message: 'your_turn' }))
         } else {
             socket.send(JSON.stringify({ type: 'full' }))
             socket.close()
@@ -52,7 +52,7 @@ function peerProxy(httpServer) {
                 console.log("player2 quit")
                 currTurn = 1
             }
-        })   
+        })
     })
 
 }
